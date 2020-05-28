@@ -18,9 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { BooksComponent } from './books/books.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -46,7 +46,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCardModule,
     MatIconModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
