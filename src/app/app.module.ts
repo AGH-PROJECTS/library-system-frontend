@@ -21,6 +21,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthorsComponent } from './authors/authors.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { OrdersComponent } from './orders/orders.component';
+import { PublishersComponent } from './publishers/publishers.component';
+import { UsersComponent } from './users/users.component';
+import { BookComponent } from './book/book.component';
 
 
 @NgModule({
@@ -32,7 +38,13 @@ import { HttpClientModule } from '@angular/common/http';
     SuccessAlertComponent,
     NavbarComponent,
     BooksComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    AuthorsComponent,
+    CategoriesComponent,
+    OrdersComponent,
+    PublishersComponent,
+    UsersComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

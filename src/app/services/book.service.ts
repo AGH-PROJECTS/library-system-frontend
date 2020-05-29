@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Publisher} from '../model/publisher';
+import {Book} from '../model/book';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PublisherService {
+export class BookService {
   private BASIC_URL = "http://localhost:8080"
-  private GET_PUBLISHERS = `${this.BASIC_URL}/publishers`;
+  private GET_PUBLISHERS = `${this.BASIC_URL}/books`;
 
   constructor(private http: HttpClient) { }
 
-  getAllPublishers() : Observable<Publisher[]> {
-    return this.http.get<Publisher[]>(this.GET_PUBLISHERS);
+  getAllBooks() : Observable<Book[]> {
+    return this.http.get<Book[]>(this.GET_PUBLISHERS);
   }
-
-
 }

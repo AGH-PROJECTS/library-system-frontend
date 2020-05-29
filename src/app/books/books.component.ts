@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Publisher} from '../model/publisher';
 import {PublisherService} from '../services/publisher.service';
+import {Book} from '../model/book';
+import {BookService} from '../services/book.service';
 
 @Component({
   selector: 'app-books',
@@ -9,17 +9,17 @@ import {PublisherService} from '../services/publisher.service';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  publishers: Publisher[] = [];
-  constructor(private publisherService: PublisherService) { }
+  books: Book[] = [];
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.getAllPublishers();
+    this.getAllBooks();
   }
 
-  public getAllPublishers() {
-    this.publisherService.getAllPublishers().subscribe(
+  public getAllBooks() {
+    this.bookService.getAllBooks().subscribe(
       res => {
-        this.publishers = res;
+        this.books = res;
       },
       err => {
         console.log(err);
