@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Publisher} from '../model/publisher';
 import {PublisherService} from '../services/publisher.service';
+import {Role} from "../model/role.enum";
+import {User} from "../model/user";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-publishers',
@@ -8,9 +11,11 @@ import {PublisherService} from '../services/publisher.service';
   styleUrls: ['./publishers.component.css']
 })
 export class PublishersComponent implements OnInit {
-
   publishers: Publisher[] = [];
-  constructor(private publisherService: PublisherService) { }
+  currentUser: User;
+  constructor(private publisherService: PublisherService, public authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x=> this.currentUser = x)
+  }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -26,5 +31,10 @@ export class PublishersComponent implements OnInit {
         alert("Error with get books");
       }
     )
+  }
+
+  isAdmin() {
+    console.log(this.currentUser && this.currentUser.roles.includes(Role.ADMIN))
+    return this.currentUser && this.currentUser.roles.includes(Role.ADMIN) ;
   }
 }

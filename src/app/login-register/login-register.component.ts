@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Role} from "../model/role.enum";
 
 @Component({
   selector: 'app-login-register',
@@ -11,18 +12,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginRegisterComponent implements OnInit {
   loginForm: FormGroup;
   error: string;
-  returnUrl: string;
 
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder : FormBuilder,
     private route: ActivatedRoute,
     private router: Router
-    ) {
-      if (this.authenticationService.currentUserValue) {
-        this.router.navigate(['/']);
-    }
-  }
+    ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -30,7 +26,6 @@ export class LoginRegisterComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   loginUser() {
@@ -43,7 +38,13 @@ export class LoginRegisterComponent implements OnInit {
       .login(this.loginForm.controls.username.value,this.loginForm.controls.password.value)
       .subscribe( data => {
           console.log("Zalogowano");
-          this.router.navigate([this.returnUrl]);
+          if(this.authenticationService.currentUserValue.roles.includes(Role.ADMIN)) {
+            this.router.navigate(['/admin']);
+          }
+          else {
+            this.router.navigate(['/user'])
+          }
+
         },
         error => {
           this.error = error;

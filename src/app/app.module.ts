@@ -3,10 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ServerComponent } from './server/server.component';
-import { ServersComponent } from './servers/servers.component';
-import { WarningAlertComponent } from './warning-alert/warning-alert.component';
-import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,22 +16,22 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AuthorsComponent } from './authors/authors.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PublishersComponent } from './publishers/publishers.component';
 import { UsersComponent } from './users/users.component';
 import { BookComponent } from './book/book.component';
-
+import { AuthGuard } from "./auth.guard";
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { JwtInterceptorInterceptor} from "./interceptor/jwt-interceptor.interceptor";
+import { ErrorInterceptorInterceptor} from "./interceptor/error-interceptor.interceptor";
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServerComponent,
-    ServersComponent,
-    WarningAlertComponent,
-    SuccessAlertComponent,
     NavbarComponent,
     BooksComponent,
     LoginRegisterComponent,
@@ -44,7 +40,9 @@ import { BookComponent } from './book/book.component';
     OrdersComponent,
     PublishersComponent,
     UsersComponent,
-    BookComponent
+    BookComponent,
+    AdminPanelComponent,
+    UserPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +60,9 @@ import { BookComponent } from './book/book.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

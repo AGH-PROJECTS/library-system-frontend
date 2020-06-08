@@ -1,1 +1,8 @@
-<p>authors works!</p>
+<div *ngFor="let author of authors" class="list-group-item list-group-item-action">
+  {{author.firstName}}
+  {{author.lastName}}
+  {{author.dateOfBirth}}
+
+  <button *ngIf="isAdmin()">Edit</button>
+  <button *ngIf="isAdmin()">Delete</button>
+</div>

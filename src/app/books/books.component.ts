@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {PublisherService} from '../services/publisher.service';
 import {Book} from '../model/book';
 import {BookService} from '../services/book.service';
+import {Role} from "../model/role.enum";
+import {AuthenticationService} from "../services/authentication.service";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-books',
@@ -10,7 +12,10 @@ import {BookService} from '../services/book.service';
 })
 export class BooksComponent implements OnInit {
   books: Book[] = [];
-  constructor(private bookService: BookService) { }
+  currentUser: User;
+  constructor(private bookService: BookService, public authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x=> this.currentUser = x)
+  }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -28,4 +33,8 @@ export class BooksComponent implements OnInit {
     )
   }
 
+  isAdmin() {
+    console.log(this.currentUser && this.currentUser.roles.includes(Role.ADMIN))
+    return this.currentUser && this.currentUser.roles.includes(Role.ADMIN) ;
+  }
 }

@@ -8,4 +8,5 @@ export interface User {
   birthDate: string;
   roles: Array<string>;
   pesel: string;
+  jwt?:string;
 }

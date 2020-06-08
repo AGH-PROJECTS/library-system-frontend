@@ -4,8 +4,8 @@
   <a mat-button routerLink="authors">Authors</a>
   <a mat-button routerLink="books">Books</a>
   <a mat-button routerLink="categories">Categories</a>
-  <a mat-button routerLink="orders">Orders</a>
+  <a mat-button *ngIf="isAdmin()" routerLink="orders">Orders</a>
   <a mat-button routerLink="publishers">Publishers</a>
-  <a mat-button routerLink="users">Users</a>
-  <a mat-raised-button color="accent" routerLink="login-register">SingIn/SignUp</a>
+  <a mat-raised-button color="accent" *ngIf='!authenticationService.loggedIn()' routerLink="login-register">SingIn/SignUp</a>
+  <a mat-raised-button color="accent" *ngIf='authenticationService.loggedIn()' (click)="authenticationService.logoutUser()">Logout</a>
 </mat-toolbar>
