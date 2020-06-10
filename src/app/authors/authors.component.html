@@ -1,8 +1,33 @@
-<div *ngFor="let author of authors" class="list-group-item list-group-item-action">
-  {{author.firstName}}
-  {{author.lastName}}
-  {{author.dateOfBirth}}
+<table mat-table [dataSource]="authors">
+  <ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+    <mat-cell *matCellDef="let author"> {{author.firstName}} </mat-cell>
+  </ng-container>
 
-  <button *ngIf="isAdmin()">Edit</button>
-  <button *ngIf="isAdmin()">Delete</button>
-</div>
+  <ng-container matColumnDef="lastName">
+    <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+    <mat-cell *matCellDef="let author"> {{author.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dateOfBirth">
+    <mat-header-cell *matHeaderCellDef> Date of birth </mat-header-cell>
+    <mat-cell *matCellDef="let author">
+      <p>{{author.dateOfBirth}}</p>
+     <!-- <input type="text" class="age-input" value="{{ author.dateOfBirth }}">-->
+
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+    <mat-cell  *matCellDef="let author" >
+      <button  mat-raised-button color="primary" (click)="onEdit(author)">Edit</button>
+      <button  mat-raised-button color="warn" (click)="onDelete(author.id)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+</table>
+
+<button mat-raised-button *ngIf="isAdmin()" color="primary" (click)="onAdd()">Add new Author</button>

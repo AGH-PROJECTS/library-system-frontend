@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Add Author</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>first name</mat-label>
+    <input matInput [(ngModel)]="data.firstname">
+    <button mat-button *ngIf="data.firstname" matSuffix mat-icon-button aria-label="Clear" (click)="data.firstname=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>last name</mat-label>
+    <input matInput [(ngModel)]="data.lastname">
+    <button mat-button *ngIf="data.lastname" matSuffix mat-icon-button aria-label="Clear" (click)="data.lastname=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>birthday</mat-label>
+    <input type="date" matInput [(ngModel)]="data.birthday">
+    <button mat-button *ngIf="data.birthday" matSuffix mat-icon-button aria-label="Clear" (click)="data.birthday=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="saveChanges()" mat-dialog-close>Save</button>
+
+  <button mat-raised-button color="warn" mat-dialog-close>Discard</button>
+</div>

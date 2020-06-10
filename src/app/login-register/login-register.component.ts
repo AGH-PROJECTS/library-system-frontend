@@ -12,6 +12,7 @@ import {Role} from "../model/role.enum";
 export class LoginRegisterComponent implements OnInit {
   loginForm: FormGroup;
   error: string;
+ // registerForm: FormGroup;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -25,7 +26,6 @@ export class LoginRegisterComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
   }
 
   loginUser() {
@@ -50,4 +50,4 @@ export class LoginRegisterComponent implements OnInit {
           this.error = error;
         });
   }
-}
+  }

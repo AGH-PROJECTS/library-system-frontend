@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatTableModule } from "@angular/material/table";
 import { AppComponent } from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,6 +28,17 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { JwtInterceptorInterceptor} from "./interceptor/jwt-interceptor.interceptor";
 import { ErrorInterceptorInterceptor} from "./interceptor/error-interceptor.interceptor";
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { AuthorEditComponent } from './authors/author-edit/author-edit.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { BookEditComponent } from './books/book-edit/book-edit.component';
+import { CategoryEditComponent } from './categories/category-edit/category-edit.component';
+import { PublisherEditComponent } from './publishers/publisher-edit/publisher-edit.component';
+import { AuthorAddComponent } from './authors/author-add/author-add.component';
+import { registerLocaleData } from '@angular/common';
+import localePL from '@angular/common/locales/pl';
+import { CategoryAddComponent } from './categories/category-add/category-add.component';
+import { PublisherAddComponent } from './publishers/publisher-add/publisher-add.component';
+registerLocaleData(localePL, 'pl');
 
 @NgModule({
   declarations: [
@@ -42,24 +53,33 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
     UsersComponent,
     BookComponent,
     AdminPanelComponent,
-    UserPanelComponent
+    UserPanelComponent,
+    AuthorEditComponent,
+    BookEditComponent,
+    CategoryEditComponent,
+    PublisherEditComponent,
+    AuthorAddComponent,
+    CategoryAddComponent,
+    PublisherAddComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatIconModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
+      MatTableModule,
+      BrowserModule,
+      FormsModule,
+      BrowserAnimationsModule,
+      MatToolbarModule,
+      MatButtonModule,
+      AppRoutingModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatCardModule,
+      MatIconModule,
+      MatTabsModule,
+      MatCheckboxModule,
+      HttpClientModule,
+      ReactiveFormsModule,
+      MatDialogModule
+    ],
   providers: [AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true }],

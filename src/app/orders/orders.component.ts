@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Author} from "../model/author";
-import {AuthorsService} from "../services/authors.service";
 import {Order} from "../model/order";
 import {OrdersService} from "../services/orders.service";
 import {Role} from "../model/role.enum";
 import {User} from "../model/user";
-import {CategoriesService} from "../services/categories.service";
 import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
@@ -15,6 +12,7 @@ import {AuthenticationService} from "../services/authentication.service";
 })
 export class OrdersComponent implements OnInit {
   orders: Order[] = [];
+  columnsToDisplay = ['pesel', 'isbn', 'dateRent', 'dateReturn', 'employee', 'actions'];
   currentUser: User;
 
   constructor(private ordersService: OrdersService, public authenticationService:AuthenticationService) {
@@ -22,6 +20,7 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAdmin();
     this.getAllOrders();
   }
 
@@ -38,7 +37,14 @@ export class OrdersComponent implements OnInit {
   }
 
   isAdmin() {
-    console.log(this.currentUser && this.currentUser.roles.includes(Role.ADMIN))
-    return this.currentUser && this.currentUser.roles.includes(Role.ADMIN) ;
+    this.columnsToDisplay = this.currentUser && this.currentUser.roles.includes(Role.ADMIN) ? this.columnsToDisplay : this.columnsToDisplay.filter(column => column !== 'actions');
+  }
+
+  onEdit(order: Order) {
+
+  }
+
+  onDelete(id: string) {
+
   }
 }

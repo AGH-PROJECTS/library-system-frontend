@@ -16,16 +16,5 @@ export class UsersComponent implements OnInit {
     this.getAllUsers();
   }
 
-  private getAllUsers() {
-    this.usersService.getAllUsers().subscribe(
-      res=> {
-        this.users = res;
-      },
-      err=>{
-        console.log(err);
-        alert("Error with get users");
-      }
-    )
-
-  }
+  private getAllUsers() {}
 }
