@@ -1,2 +1,2 @@
 # library-system-frontend
-Angular frontend project
+Internet Engineering project is a frontendof the library system. I used Angular.
